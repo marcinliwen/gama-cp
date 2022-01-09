@@ -20,7 +20,7 @@ const Question = ({ questionId, name, questions }) => {
       setUsedQuestions(
         usedQuestions.filter((item) => item.pytanie.id !== questionId)
       );
-      setQuestion(getRandomItem(questions));
+      setQuestion(newQuestion);
       setDisplayQuestions(true);
     }
   };
