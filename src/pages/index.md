@@ -67,4 +67,47 @@ main:
   image3:
     alt: Coffee beans
     image: /img/products-grid1.jpg
+game:
+  - kategoria:
+      name: Kategoria 1
+      pytania:
+        - pytanie:
+            id: 1
+            text: '1 pytanie pierwsze'
+        - pytanie:
+            id: 2
+            text: '1 pytanie drugie'
+        - pytanie:
+            id: 3
+            text: '1 pytanie trzy'
+        - pytanie:
+            id: 4
+            text: '1 pytanie cztery'
+        - pytanie:
+            id: 5
+            text: '1 pytanie pieć'
+        - pytanie:
+            id: 6
+            text: '1 pytanie sześć'
+        - pytanie:
+            id: 7
+            text: '1 pytanie siedem'
+  - kategoria:
+      name: Kategoria 2
+      pytania:
+        - pytanie:
+            id: 1
+            text: '2 pytanie pierwsze'
+        - pytanie:
+            id: 2
+            text: '2 pytanie drugie'
+  - kategoria:
+      name: Kategoria 3
+      pytania:
+        - pytanie:
+            id: 1
+            text: '3 pytanie pierwsze'
+        - pytanie:
+            id: 2
+            text: '3 pytanie drugie'  
 ---

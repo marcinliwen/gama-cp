@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
@@ -7,6 +7,7 @@ import Layout from "../components/Layout";
 import Features from "../components/Features";
 import BlogRoll from "../components/BlogRoll";
 import FullWidthImage from "../components/FullWidthImage";
+import Question from "../components/Qiestion";
 
 // eslint-disable-next-line
 export const IndexPageTemplate = ({
@@ -74,6 +75,47 @@ export const IndexPageTemplate = ({
   );
 };
 
+export const GameMainPage = ({ game }) => {
+  const [isGame, setIsGame] = useState("");
+  const [questions, setQuestions] = useState(null);
+  console.log(questions)
+
+  const categoryHandler = (item) => {
+    setIsGame(item.kategoria.name);
+    setQuestions(item.kategoria.pytania);
+  };
+
+  
+  console.log(isGame);
+  return (
+    <div className="container">
+      <div className="wrapper center">
+      <h1>Zagraj w grę!</h1>
+      <div className="box">
+     
+
+        <h2>Wybierz kategorię</h2>
+        <ul className="category-wrapper">
+          {game.map((item, index) => {
+            return (
+              <li key={index} data-category={`category-${index}`}>
+                <button className="button is-medium" onClick={() => categoryHandler(item)} >
+                  {item.kategoria.name}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      {isGame.length > 0 ? (
+        <Question questionId={isGame} name={isGame} questions={questions} />
+      ) : (
+        ""
+      )}
+    </div>
+    </div>
+  );
+};
 IndexPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   title: PropTypes.string,
@@ -84,14 +126,15 @@ IndexPageTemplate.propTypes = {
   intro: PropTypes.shape({
     blurbs: PropTypes.array,
   }),
+  game: PropTypes.object,
 };
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark;
 
   return (
-    <Layout>
-      <IndexPageTemplate
+    <>
+      {/*<IndexPageTemplate
         image={frontmatter.image}
         title={frontmatter.title}
         heading={frontmatter.heading}
@@ -99,8 +142,9 @@ const IndexPage = ({ data }) => {
         mainpitch={frontmatter.mainpitch}
         description={frontmatter.description}
         intro={frontmatter.intro}
-      />
-    </Layout>
+      />*/}
+      <GameMainPage game={frontmatter.game} />
+    </>
   );
 };
 
@@ -142,6 +186,17 @@ export const pageQuery = graphql`
           }
           heading
           description
+        }
+        game {
+          kategoria {
+            name
+            pytania {
+              pytanie {
+                id
+                text
+              }
+            }
+          }
         }
       }
     }
